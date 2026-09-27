@@ -376,27 +376,51 @@
     var UA = navigator.userAgent || '';
     var isAndroid = /Android/i.test(UA);
     var isIOS = /iPhone|iPad|iPod/i.test(UA) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    var inApp = /Instagram|FBAN|FBAV|FB_IAB|musical_ly|Bytedance|TikTok|Line\//i.test(UA);
+    var inApp = /Instagram|FBAN|FBAV|FB_IAB|musical_ly|Bytedance|TikTok|Line\/|CriOS|FxiOS|EdgiOS|GSA\//i.test(UA);
     var framed = false;
     try { framed = window.top !== window.self; } catch (e) { framed = true; }
     if (framed || (!isAndroid && !isIOS)) return; /* desktop and previews keep normal links */
 
+    var TIKTOK_UID = '7689467763840271378'; /* @haviv.music */
     function pick(re, u) { var m = u.match(re); return m ? m[1] : null; }
     var APPS = {
-      youtube:   { pkg: 'com.google.android.youtube', ios: function (u) { return 'youtube://' + u.replace(/^https?:\/\//, ''); } },
-      spotify:   { pkg: 'com.spotify.music',          ios: function (u) { var id = pick(/artist\/(\w+)/, u); return id ? 'spotify:artist:' + id : null; } },
-      instagram: { pkg: 'com.instagram.android',      ios: function (u) { var n = pick(/instagram\.com\/([\w.]+)/, u); return n ? 'instagram://user?username=' + n : null; } },
-      tiktok:    { pkg: 'com.zhiliaoapp.musically',   ios: null },
-      facebook:  { pkg: 'com.facebook.katana',        ios: function (u) { var id = pick(/id=(\d+)/, u); return id ? 'fb://profile/' + id : null; } },
-      x:         { pkg: 'com.twitter.android',        ios: function (u) { var n = pick(/x\.com\/(\w+)/, u); return n ? 'twitter://user?screen_name=' + n : null; } },
-      threads:   { pkg: 'com.instagram.barcelona',    ios: null }
+      youtube:   { pkg: 'com.google.android.youtube', scheme: function (u) { return 'youtube://' + u.replace(/^https?:\/\//, ''); } },
+      spotify:   { pkg: 'com.spotify.music',          scheme: function (u) { var id = pick(/artist\/(\w+)/, u); return id ? 'spotify:artist:' + id : null; } },
+      instagram: { pkg: 'com.instagram.android',      scheme: function (u) { var n = pick(/instagram\.com\/([\w.]+)/, u); return n ? 'instagram://user?username=' + n : null; } },
+      /* TikTok's web "open app" button hangs, so go straight to the app's own address (same one TikTok uses). */
+      tiktok:    { pkg: null, direct: true,           scheme: function (u) { return /tiktok\.com\/@haviv\.music\/?$/i.test(u) ? 'snssdk1233://user/profile/' + TIKTOK_UID + '?params_url=' + encodeURIComponent(u) + '&refer=web' : null; } },
+      facebook:  { pkg: 'com.facebook.katana',        scheme: function (u) { var id = pick(/id=(\d+)/, u); return id ? 'fb://profile/' + id : null; } },
+      x:         { pkg: 'com.twitter.android',        scheme: function (u) { var n = pick(/x\.com\/(\w+)/, u); return n ? 'twitter://user?screen_name=' + n : null; } },
+      threads:   { pkg: 'com.instagram.barcelona',    scheme: function (u) { var n = pick(/threads\.(?:com|net)\/@([\w.]+)/, u); return n ? 'barcelona://user?username=' + n : null; } }
     };
 
-    function androidIntent(url, pkg) {
+    function fb(url) { return ';S.browser_fallback_url=' + encodeURIComponent(url) + ';end'; }
+    function httpsIntent(url, pkg) {
       var p = new URL(url);
-      return 'intent://' + p.host + p.pathname + p.search +
-        '#Intent;scheme=https;package=' + pkg +
-        ';S.browser_fallback_url=' + encodeURIComponent(url) + ';end';
+      return 'intent://' + p.host + p.pathname + p.search + '#Intent;scheme=https;package=' + pkg + fb(url);
+    }
+    function schemeIntent(scheme, url) {
+      var i = scheme.indexOf('://');
+      return 'intent://' + scheme.slice(i + 3) + '#Intent;scheme=' + scheme.slice(0, i) + fb(url);
+    }
+
+    /* Open the app; if the page is still on screen a moment later (app missing or blocked), open the web page. */
+    function launch(target, url, wait) {
+      var left = false;
+      function gone() { if (document.hidden) left = true; }
+      document.addEventListener('visibilitychange', gone);
+      window.addEventListener('pagehide', function () { left = true; }, { once: true });
+      window.addEventListener('blur', function () { left = true; }, { once: true });
+      window.location.href = target;
+      setTimeout(function () {
+        document.removeEventListener('visibilitychange', gone);
+        if (!left && !document.hidden) window.location.href = url;
+      }, wait);
+    }
+
+    /* iPhone Safari: a normal tap in the same tab is what makes iOS hand the link to the app. */
+    if (isIOS && !inApp) {
+      Array.prototype.forEach.call(document.querySelectorAll('a[data-app]'), function (a) { a.removeAttribute('target'); });
     }
 
     document.addEventListener('click', function (e) {
@@ -405,20 +429,21 @@
       var app = APPS[a.getAttribute('data-app')];
       if (!app) return;
       var url = a.href;
-      e.preventDefault();
+      var scheme = app.scheme ? app.scheme(url) : null;
 
-      if (isAndroid) { window.location.href = androidIntent(url, app.pkg); return; }
+      if (isAndroid) {
+        e.preventDefault();
+        var target = app.direct && scheme ? schemeIntent(scheme, url) : (app.pkg ? httpsIntent(url, app.pkg) : url);
+        launch(target, url, 2200);
+        return;
+      }
 
-      /* iPhone: Safari opens the app from the regular link when it is opened in the same tab.
-         Inside Instagram / Facebook / TikTok browsers, try the app scheme first, then fall back to the web. */
-      var scheme = inApp && app.ios ? app.ios(url) : null;
-      if (!scheme) { window.location.href = url; return; }
-      var left = false;
-      function gone() { left = true; }
-      document.addEventListener('visibilitychange', gone, { once: true });
-      window.addEventListener('pagehide', gone, { once: true });
-      window.location.href = scheme;
-      setTimeout(function () { if (!left && !document.hidden) window.location.href = url; }, 1400);
+      /* iPhone inside Instagram / Facebook / TikTok / Chrome: open the app directly, web as backup */
+      if (inApp) {
+        e.preventDefault();
+        if (scheme) launch(scheme, url, 1600); else window.location.href = url;
+      }
+      /* iPhone Safari: the tap goes through normally, in the same tab, and iOS opens the app */
     });
   })();
 </script>
