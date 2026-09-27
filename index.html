@@ -113,14 +113,6 @@
   .x { color: var(--c-x); }
   .threads { color: var(--c-threads); }
 
-  /* ---------- primary actions ---------- */
-  .primary { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .btn-main {
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-    padding: 12px; border-radius: 18px; text-decoration: none;
-    font-weight: 800; font-size: 1.02rem; white-space: nowrap;
-  }
-
   /* ---------- sections ---------- */
   section { display: flex; flex-direction: column; gap: 12px; }
   .label {
@@ -131,15 +123,36 @@
   .label h2 { font-family: var(--display); font-size: 1.3rem; }
   .label span { color: var(--muted); font-size: .85rem; font-weight: 700; }
 
-  /* links */
-  .links { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
-  .link {
-    display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 14px;
-    padding: 10px 12px; border-radius: 18px; text-decoration: none;
+  /* link hub: every platform, right under the hero */
+  .hub { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .tile {
+    display: flex; align-items: center; gap: 10px; min-height: 64px;
+    padding: 10px; border-radius: 18px; text-decoration: none;
   }
-  .link b { display: block; font-size: 1.04rem; }
-  .link small { display: block; color: var(--muted); font-size: .86rem; line-height: 1.3; direction: ltr; text-align: right; font-weight: 600; }
-  .arrow { width: 20px; height: 20px; color: var(--ink); opacity: .6; }
+  .tile .t { min-width: 0; display: flex; flex-direction: column; }
+  .tile b { font-size: 1.02rem; line-height: 1.25; }
+  .tile small {
+    color: var(--muted); font-size: .8rem; font-weight: 700; line-height: 1.3;
+    unicode-bidi: plaintext; text-align: right;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .tile.hot { border-color: rgba(226, 178, 60, .85); background: rgba(255, 255, 255, .34); }
+  .logo svg { width: 22px; height: 22px; }
+  .mail-c { color: var(--gold-deep); }
+
+  /* shown only if an app did not open */
+  .toast {
+    position: fixed; z-index: 20; left: 16px; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    max-width: 568px; margin-inline: auto;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 10px 12px 10px 10px; border-radius: 18px;
+    background: rgba(255, 255, 255, .82); font-weight: 700;
+  }
+  .toast span { white-space: nowrap; font-size: .95rem; }
+  .toast a {
+    flex: none; text-decoration: none; font-weight: 800; border-radius: 12px; padding: 8px 14px;
+    background: var(--gold); color: #1d1503; box-shadow: 0 4px 12px rgba(169, 122, 12, .35);
+  }
 
   /* songs */
   .songs { display: flex; flex-direction: column; gap: 16px; }
@@ -197,8 +210,10 @@
     .mark { font-size: 3.3rem; }
     .head { width: 160px; }
     .shorts { grid-template-columns: 108px 1fr; gap: 12px; }
-    .btn-main { font-size: .9rem; padding: 10px 6px; gap: 7px; }
-    .btn-main .logo { width: 36px; height: 36px; font-size: 20px; }
+    .tile { padding: 9px 8px; gap: 8px; }
+    .tile .logo { width: 38px; height: 38px; font-size: 21px; }
+    .tile b { font-size: .96rem; }
+    .tile small { font-size: .74rem; }
   }
   @media (prefers-reduced-motion: no-preference) {
     .head { animation: float 6s ease-in-out infinite; }
@@ -210,6 +225,7 @@
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.8v14.4a1 1 0 0 0 1.5.86l12-7.2a1 1 0 0 0 0-1.72l-12-7.2A1 1 0 0 0 7 4.8z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7.5 8 5.5 8-5.5"/></symbol>
     <symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></symbol>
   </defs>
 </svg>
@@ -229,14 +245,35 @@
     </div>
   </header>
 
-  <nav class="primary" aria-label="פעולות עיקריות">
-    <a data-app="spotify" class="btn-main glass" href="https://open.spotify.com/artist/6UR8HUTUXgYC6q6Qd0eXdX" target="_blank" rel="noopener">
-      <span class="logo spotify"><i class="fa-brands fa-spotify" aria-hidden="true"></i></span>האזנה בספוטיפיי
-    </a>
-    <a data-app="youtube" class="btn-main glass" href="https://www.youtube.com/@HAVIVMUSIC" target="_blank" rel="noopener">
-      <span class="logo youtube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></span>לערוץ היוטיוב
-    </a>
-  </nav>
+  <section id="links" aria-labelledby="links-h">
+    <div class="label glass"><h2 id="links-h">כל הקישורים</h2><span>במקום אחד</span></div>
+    <ul class="hub">
+      <li><a data-app="spotify" class="tile hot glass" href="https://open.spotify.com/artist/6UR8HUTUXgYC6q6Qd0eXdX" target="_blank" rel="noopener">
+        <span class="logo spotify"><i class="fa-brands fa-spotify" aria-hidden="true"></i></span>
+        <span class="t"><b>Spotify</b><small>האזנה לשירים</small></span></a></li>
+      <li><a data-app="youtube" class="tile hot glass" href="https://www.youtube.com/@HAVIVMUSIC" target="_blank" rel="noopener">
+        <span class="logo youtube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></span>
+        <span class="t"><b>YouTube</b><small>קליפים וסרטונים</small></span></a></li>
+      <li><a data-app="instagram" class="tile glass" href="https://www.instagram.com/havivmusic" target="_blank" rel="noopener">
+        <span class="logo instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></span>
+        <span class="t"><b>Instagram</b><small>@havivmusic</small></span></a></li>
+      <li><a data-app="tiktok" class="tile glass" href="https://www.tiktok.com/@haviv.music" target="_blank" rel="noopener">
+        <span class="logo tiktok"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></span>
+        <span class="t"><b>TikTok</b><small>@haviv.music</small></span></a></li>
+      <li><a data-app="facebook" class="tile glass" href="https://www.facebook.com/profile.php?id=61595006690682" target="_blank" rel="noopener">
+        <span class="logo facebook"><i class="fa-brands fa-facebook" aria-hidden="true"></i></span>
+        <span class="t"><b>Facebook</b><small>HAVIV</small></span></a></li>
+      <li><a data-app="x" class="tile glass" href="https://x.com/HAVIVMUSIC" target="_blank" rel="noopener">
+        <span class="logo x"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></span>
+        <span class="t"><b>X</b><small>@HAVIVMUSIC</small></span></a></li>
+      <li><a data-app="threads" class="tile glass" href="https://www.threads.com/@havivmusic" target="_blank" rel="noopener">
+        <span class="logo threads"><i class="fa-brands fa-threads" aria-hidden="true"></i></span>
+        <span class="t"><b>Threads</b><small>@havivmusic</small></span></a></li>
+      <li><a class="tile glass" href="mailto:havivmusic1@gmail.com">
+        <span class="logo mail-c"><svg aria-hidden="true"><use href="#i-mail"/></svg></span>
+        <span class="t"><b>מייל</b><small>יצירת קשר</small></span></a></li>
+    </ul>
+  </section>
 
   <section id="music" aria-labelledby="music-h">
     <div class="label glass"><h2 id="music-h">השירים</h2><span>סינגלים 2026</span></div>
@@ -295,40 +332,6 @@
     </div>
   </section>
 
-  <section id="follow" aria-labelledby="follow-h">
-    <div class="label glass"><h2 id="follow-h">עקבו אחרי HAVIV</h2></div>
-    <ul class="links">
-      <li><a data-app="spotify" class="link glass" href="https://open.spotify.com/artist/6UR8HUTUXgYC6q6Qd0eXdX" target="_blank" rel="noopener">
-        <span class="logo spotify"><i class="fa-brands fa-spotify" aria-hidden="true"></i></span>
-        <span><b>Spotify</b><small>HAVIV</small></span>
-        <svg class="arrow" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
-      <li><a data-app="youtube" class="link glass" href="https://www.youtube.com/@HAVIVMUSIC" target="_blank" rel="noopener">
-        <span class="logo youtube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></span>
-        <span><b>YouTube</b><small>@HAVIVMUSIC</small></span>
-        <svg class="arrow" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
-      <li><a data-app="instagram" class="link glass" href="https://www.instagram.com/havivmusic" target="_blank" rel="noopener">
-        <span class="logo instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></span>
-        <span><b>Instagram</b><small>@havivmusic</small></span>
-        <svg class="arrow" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
-      <li><a data-app="tiktok" class="link glass" href="https://www.tiktok.com/@haviv.music" target="_blank" rel="noopener">
-        <span class="logo tiktok"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></span>
-        <span><b>TikTok</b><small>@haviv.music</small></span>
-        <svg class="arrow" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
-      <li><a data-app="facebook" class="link glass" href="https://www.facebook.com/profile.php?id=61595006690682" target="_blank" rel="noopener">
-        <span class="logo facebook"><i class="fa-brands fa-facebook" aria-hidden="true"></i></span>
-        <span><b>Facebook</b><small>HAVIV</small></span>
-        <svg class="arrow" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
-      <li><a data-app="x" class="link glass" href="https://x.com/HAVIVMUSIC" target="_blank" rel="noopener">
-        <span class="logo x"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></span>
-        <span><b>X</b><small>@HAVIVMUSIC</small></span>
-        <svg class="arrow" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
-      <li><a data-app="threads" class="link glass" href="https://www.threads.com/@havivmusic" target="_blank" rel="noopener">
-        <span class="logo threads"><i class="fa-brands fa-threads" aria-hidden="true"></i></span>
-        <span><b>Threads</b><small>@havivmusic</small></span>
-        <svg class="arrow" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
-    </ul>
-  </section>
-
   <section id="about" aria-labelledby="about-h">
     <div class="about glass">
       <h2 id="about-h">על HAVIV</h2>
@@ -349,6 +352,11 @@
   </section>
 
   <footer class="glass">© 2026 HAVIV</footer>
+</div>
+
+<div class="toast glass" id="toast" role="status" dir="rtl" lang="he" hidden>
+  <span>האפליקציה לא נפתחה?</span>
+  <a id="toast-web" href="#" target="_blank" rel="noopener">פתיחה בדפדפן</a>
 </div>
 
 <script>
@@ -376,10 +384,12 @@
     var UA = navigator.userAgent || '';
     var isAndroid = /Android/i.test(UA);
     var isIOS = /iPhone|iPad|iPod/i.test(UA) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    var inApp = /Instagram|FBAN|FBAV|FB_IAB|musical_ly|Bytedance|TikTok|Line\/|CriOS|FxiOS|EdgiOS|GSA\//i.test(UA);
+    var inApp = /Instagram|FBAN|FBAV|FB_IAB|musical_ly|Bytedance|TikTok|WhatsApp|Line\/|CriOS|FxiOS|EdgiOS|GSA\//i.test(UA) ||
+                (isIOS && !/Safari\//.test(UA)); /* app browsers on iPhone drop the "Safari" tag */
     var framed = false;
     try { framed = window.top !== window.self; } catch (e) { framed = true; }
-    if (framed || (!isAndroid && !isIOS)) return; /* desktop and previews keep normal links */
+    if (!isAndroid && !isIOS) return;      /* computers keep normal links */
+    if (isAndroid && framed) return;       /* previews on Android keep normal links */
 
     var TIKTOK_UID = '7689467763840271378'; /* @haviv.music */
     function pick(re, u) { var m = u.match(re); return m ? m[1] : null; }
@@ -387,13 +397,63 @@
       youtube:   { pkg: 'com.google.android.youtube', scheme: function (u) { return 'youtube://' + u.replace(/^https?:\/\//, ''); } },
       spotify:   { pkg: 'com.spotify.music',          scheme: function (u) { var id = pick(/artist\/(\w+)/, u); return id ? 'spotify:artist:' + id : null; } },
       instagram: { pkg: 'com.instagram.android',      scheme: function (u) { var n = pick(/instagram\.com\/([\w.]+)/, u); return n ? 'instagram://user?username=' + n : null; } },
-      /* TikTok's web "open app" button hangs, so go straight to the app's own address (same one TikTok uses). */
+      /* TikTok's own "open app" button hangs, so TikTok always goes straight to the app address (the one TikTok itself uses). */
       tiktok:    { pkg: null, direct: true,           scheme: function (u) { return /tiktok\.com\/@haviv\.music\/?$/i.test(u) ? 'snssdk1233://user/profile/' + TIKTOK_UID + '?params_url=' + encodeURIComponent(u) + '&refer=web' : null; } },
       facebook:  { pkg: 'com.facebook.katana',        scheme: function (u) { var id = pick(/id=(\d+)/, u); return id ? 'fb://profile/' + id : null; } },
       x:         { pkg: 'com.twitter.android',        scheme: function (u) { var n = pick(/x\.com\/(\w+)/, u); return n ? 'twitter://user?screen_name=' + n : null; } },
       threads:   { pkg: 'com.instagram.barcelona',    scheme: function (u) { var n = pick(/threads\.(?:com|net)\/@([\w.]+)/, u); return n ? 'barcelona://user?username=' + n : null; } }
     };
+    var links = document.querySelectorAll('a[data-app]');
 
+    /* small bar with a web link, shown only if the app did not open */
+    var toast = document.getElementById('toast'), toastLink = document.getElementById('toast-web'), toastTimer;
+    function offerWeb(url) {
+      if (!toast) return;
+      toastLink.href = url;
+      toast.hidden = false;
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function () { toast.hidden = true; }, 9000);
+    }
+    if (toastLink) toastLink.addEventListener('click', function () { toast.hidden = true; });
+
+    /* wait a moment; if the page is still on screen the app did not open */
+    function watch(then, wait) {
+      var left = false;
+      function gone() { if (document.hidden) left = true; }
+      document.addEventListener('visibilitychange', gone);
+      window.addEventListener('pagehide', function () { left = true; }, { once: true });
+      setTimeout(function () {
+        document.removeEventListener('visibilitychange', gone);
+        if (!left && !document.hidden) then();
+      }, wait);
+    }
+
+    if (isIOS) {
+      /* iPhone: the link itself becomes the app address, so a normal tap opens the app
+         (works in Safari and inside Instagram, WhatsApp, Claude and other apps). */
+      Array.prototype.forEach.call(links, function (a) {
+        var app = APPS[a.getAttribute('data-app')];
+        var web = a.href;
+        a.setAttribute('data-web', web);
+        var scheme = app && (app.direct || inApp || framed) ? app.scheme(web) : null;
+        if (scheme) {
+          a.href = scheme;
+          a.setAttribute('data-scheme', '');
+          if (!framed) a.removeAttribute('target');
+        } else if (!framed) {
+          a.removeAttribute('target'); /* Safari: same-tab tap lets iOS hand the link to the app */
+        }
+      });
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest && e.target.closest('a[data-scheme]');
+        if (!a) return;
+        var web = a.getAttribute('data-web');
+        watch(function () { offerWeb(web); }, 1600);
+      });
+      return;
+    }
+
+    /* Android */
     function fb(url) { return ';S.browser_fallback_url=' + encodeURIComponent(url) + ';end'; }
     function httpsIntent(url, pkg) {
       var p = new URL(url);
@@ -403,26 +463,6 @@
       var i = scheme.indexOf('://');
       return 'intent://' + scheme.slice(i + 3) + '#Intent;scheme=' + scheme.slice(0, i) + fb(url);
     }
-
-    /* Open the app; if the page is still on screen a moment later (app missing or blocked), open the web page. */
-    function launch(target, url, wait) {
-      var left = false;
-      function gone() { if (document.hidden) left = true; }
-      document.addEventListener('visibilitychange', gone);
-      window.addEventListener('pagehide', function () { left = true; }, { once: true });
-      window.addEventListener('blur', function () { left = true; }, { once: true });
-      window.location.href = target;
-      setTimeout(function () {
-        document.removeEventListener('visibilitychange', gone);
-        if (!left && !document.hidden) window.location.href = url;
-      }, wait);
-    }
-
-    /* iPhone Safari: a normal tap in the same tab is what makes iOS hand the link to the app. */
-    if (isIOS && !inApp) {
-      Array.prototype.forEach.call(document.querySelectorAll('a[data-app]'), function (a) { a.removeAttribute('target'); });
-    }
-
     document.addEventListener('click', function (e) {
       var a = e.target.closest && e.target.closest('a[data-app]');
       if (!a) return;
@@ -430,20 +470,9 @@
       if (!app) return;
       var url = a.href;
       var scheme = app.scheme ? app.scheme(url) : null;
-
-      if (isAndroid) {
-        e.preventDefault();
-        var target = app.direct && scheme ? schemeIntent(scheme, url) : (app.pkg ? httpsIntent(url, app.pkg) : url);
-        launch(target, url, 2200);
-        return;
-      }
-
-      /* iPhone inside Instagram / Facebook / TikTok / Chrome: open the app directly, web as backup */
-      if (inApp) {
-        e.preventDefault();
-        if (scheme) launch(scheme, url, 1600); else window.location.href = url;
-      }
-      /* iPhone Safari: the tap goes through normally, in the same tab, and iOS opens the app */
+      e.preventDefault();
+      window.location.href = app.direct && scheme ? schemeIntent(scheme, url) : (app.pkg ? httpsIntent(url, app.pkg) : url);
+      watch(function () { offerWeb(url); }, 2200);
     });
   })();
 </script>
