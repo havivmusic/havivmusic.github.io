@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HAVIV</title>
+<meta name="description" content="HAVIV – זמר ויוצר פופ ו-R&B. שירים על אמונה, אהבה ותקווה. כל השירים, הסרטונים והרשתות במקום אחד.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Suez+One&family=Assistant:wght@400;600;700;800&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/fontawesome.min.js" data-auto-replace-svg="nest"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/brands.min.js"></script>
+<meta property="og:title" content="HAVIV">
+<meta property="og:description" content="זמר ויוצר פופ ו-R&B. שירים על אמונה, אהבה ותקווה.">
+<meta property="og:image" content="img/og.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#4aa6f0">
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/icon-180.png">
+<style>*,*::before,*::after{box-sizing:border-box} img{max-width:100%} [hidden]{display:none!important} body{margin:0}</style>
+<style>
+  :root {
+    --ink: #0b1f45;
+    --muted: #2f4670;
+    --glass: rgba(255, 255, 255, .24);
+    --glass-hover: rgba(255, 255, 255, .40);
+    --glass-edge: rgba(255, 255, 255, .62);
+    --gold: #e2b23c;
+    --gold-deep: #a97a0c;
+    --float: 0 10px 30px rgba(8, 38, 92, .18), 0 1px 0 rgba(255, 255, 255, .5) inset;
+    --display: "Suez One", "Frank Ruhl Libre", "David", serif;
+    --body: "Assistant", "Segoe UI", "Arial Hebrew", Arial, sans-serif;
+    --mark: "Archivo Black", "Arial Black", Impact, sans-serif;
+    --c-spotify: #1db954;
+    --c-youtube: #ff0033;
+    --c-instagram: #e1306c;
+    --c-tiktok: #111111;
+    --c-facebook: #1877f2;
+    --c-x: #000000;
+    --c-threads: #000000;
+  }
+
+  body {
+    background: #4aa6f0;
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  .sky {
+    position: fixed; inset: 0; z-index: 0;
+    background: #4aa6f0 url("img/sky.jpg") center 70% / cover no-repeat;
+  }
+  .site {
+    position: relative; z-index: 1;
+    max-width: 600px;
+    margin: 0 auto;
+    padding-inline: 16px;
+    padding-block: 20px 44px;
+    display: flex; flex-direction: column; gap: 34px;
+  }
+  a { color: inherit; }
+  h1, h2, h3 { font-weight: 400; line-height: 1.2; text-wrap: balance; margin: 0; }
+  p { margin: 0; }
+  :focus-visible { outline: 3px solid #fff; outline-offset: 3px; border-radius: 12px; }
+
+  /* the one shared surface: frosted glass floating over the sky */
+  .glass {
+    background: var(--glass);
+    border: 1px solid var(--glass-edge);
+    box-shadow: var(--float);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: blur(14px) saturate(140%);
+  }
+  a.glass, button.glass { transition: background .18s ease, transform .18s ease; }
+  a.glass:hover { background: var(--glass-hover); transform: translateY(-2px); }
+
+  /* ---------- hero ---------- */
+  .hero { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; padding-top: 8px; }
+  .head { width: 190px; max-width: 100%; height: auto; filter: drop-shadow(0 18px 22px rgba(8, 38, 92, .32)); }
+  .mark {
+    font-family: var(--mark); font-size: 4.2rem; letter-spacing: .05em; line-height: 1; direction: ltr;
+    background: linear-gradient(180deg, #ffffff 10%, #e8eef5 45%, #aebccc 70%, #ffffff 92%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    -webkit-text-stroke: 1.5px var(--gold);
+    filter: drop-shadow(0 5px 10px rgba(8, 38, 92, .38));
+    margin-top: 2px;
+  }
+  .tagline {
+    font-family: var(--display); font-size: 1.2rem; text-wrap: balance;
+    padding: 8px 18px; border-radius: 999px; margin-top: 10px;
+  }
+  .facts { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 8px; }
+  .chip { font-size: .82rem; font-weight: 800; letter-spacing: .02em; padding: 4px 12px; border-radius: 999px; }
+
+  /* ---------- brand logo badges ---------- */
+  .logo {
+    width: 44px; height: 44px; flex: none; border-radius: 12px;
+    display: grid; place-items: center;
+    background: rgba(255, 255, 255, .92);
+    box-shadow: 0 2px 6px rgba(8, 38, 92, .15);
+    font-size: 24px; line-height: 1;
+  }
+  .logo.sm { width: 28px; height: 28px; border-radius: 8px; font-size: 16px; }
+  .logo .svg-inline--fa, .logo i { height: 1em; }
+  .spotify { color: var(--c-spotify); }
+  .youtube { color: var(--c-youtube); }
+  .instagram { color: var(--c-instagram); }
+  .tiktok { color: var(--c-tiktok); }
+  .facebook { color: var(--c-facebook); }
+  .x { color: var(--c-x); }
+  .threads { color: var(--c-threads); }
+
+  /* ---------- primary actions ---------- */
+  .primary { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .btn-main {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 12px; border-radius: 18px; text-decoration: none;
+    font-weight: 800; font-size: 1.02rem; white-space: nowrap;
+  }
+
+  /* ---------- sections ---------- */
+  section { display: flex; flex-direction: column; gap: 12px; }
+  .label {
+    align-self: flex-start;
+    display: inline-flex; align-items: baseline; gap: 10px;
+    padding: 6px 16px; border-radius: 999px;
+  }
+  .label h2 { font-family: var(--display); font-size: 1.3rem; }
+  .label span { color: var(--muted); font-size: .85rem; font-weight: 700; }
+
+  /* links */
+  .links { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .link {
+    display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 14px;
+    padding: 10px 12px; border-radius: 18px; text-decoration: none;
+  }
+  .link b { display: block; font-size: 1.04rem; }
+  .link small { display: block; color: var(--muted); font-size: .86rem; line-height: 1.3; direction: ltr; text-align: right; font-weight: 600; }
+  .arrow { width: 20px; height: 20px; color: var(--ink); opacity: .6; }
+
+  /* songs */
+  .songs { display: flex; flex-direction: column; gap: 16px; }
+  .song { border-radius: 22px; padding: 10px; display: flex; flex-direction: column; gap: 12px; }
+  .cover { position: relative; display: block; aspect-ratio: 16 / 9; max-width: 100%; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 20px rgba(8, 38, 92, .25); }
+  .cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .play {
+    position: absolute; left: 12px; bottom: 12px;
+    width: 52px; height: 52px; border-radius: 50%;
+    background: rgba(255, 255, 255, .92); color: #0b1f45;
+    display: grid; place-items: center; box-shadow: 0 6px 18px rgba(0, 0, 0, .28);
+    transition: transform .15s ease;
+  }
+  .play svg { width: 20px; height: 20px; margin-left: 3px; }
+  .cover:hover .play { transform: scale(1.08); }
+  .song-body { padding: 0 8px 6px; display: flex; flex-direction: column; gap: 8px; }
+  .song-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .song h3 { font-family: var(--display); font-size: 1.45rem; }
+  .meta { color: var(--muted); font-size: .88rem; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .quote { font-family: var(--display); font-size: 1.05rem; border-right: 3px solid var(--gold); padding-right: 12px; }
+  .song p.desc { color: var(--muted); font-weight: 600; }
+  .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px 6px 8px; border-radius: 999px; text-decoration: none; font-weight: 800; font-size: .92rem;
+  }
+
+  /* shorts */
+  .shorts { display: grid; grid-template-columns: 140px 1fr; gap: 16px; align-items: center; border-radius: 22px; padding: 10px; }
+  .short-thumb { position: relative; display: block; aspect-ratio: 9 / 16; max-width: 100%; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 20px rgba(8, 38, 92, .25); }
+  .short-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .play.small { width: 40px; height: 40px; left: 8px; bottom: 8px; }
+  .play.small svg { width: 16px; height: 16px; }
+  .shorts-copy { display: flex; flex-direction: column; gap: 10px; padding-left: 6px; }
+  .shorts-copy h3 { font-family: var(--display); font-size: 1.3rem; }
+  .shorts-copy p { color: var(--muted); font-size: .95rem; font-weight: 600; }
+
+  /* about */
+  .about { border-radius: 22px; padding: 18px 20px 20px; display: grid; gap: 10px; }
+  .about h2 { font-family: var(--display); font-size: 1.4rem; }
+  .about p { max-width: 62ch; font-weight: 600; }
+
+  /* contact */
+  .contact { border-radius: 22px; padding: 18px 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+  .contact h2 { font-family: var(--display); font-size: 1.35rem; }
+  .contact p { color: var(--muted); font-size: .95rem; font-weight: 600; }
+  .mail { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .mail code { font-family: var(--body); font-weight: 800; direction: ltr; background: rgba(255, 255, 255, .55); padding: 8px 12px; border-radius: 12px; user-select: all; }
+  .copy { font: inherit; font-weight: 800; cursor: pointer; border: 0; border-radius: 12px; padding: 8px 16px; background: var(--gold); color: #1d1503; box-shadow: 0 4px 12px rgba(169, 122, 12, .35); }
+  .copy:hover { background: #ecc257; }
+
+  footer { align-self: center; font-size: .85rem; font-weight: 700; padding: 6px 16px; border-radius: 999px; }
+
+  @media (max-width: 440px) {
+    .mark { font-size: 3.3rem; }
+    .head { width: 160px; }
+    .shorts { grid-template-columns: 108px 1fr; gap: 12px; }
+    .btn-main { font-size: .9rem; padding: 10px 6px; gap: 7px; }
+    .btn-main .logo { width: 36px; height: 36px; font-size: 20px; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .head { animation: float 6s ease-in-out infinite; }
+    @keyframes float { 0%, 100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-10px) rotate(1deg); } }
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.8v14.4a1 1 0 0 0 1.5.86l12-7.2a1 1 0 0 0 0-1.72l-12-7.2A1 1 0 0 0 7 4.8z"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></symbol>
+  </defs>
+</svg>
+
+<div class="sky" aria-hidden="true"></div>
+
+<div class="site" dir="rtl" lang="he">
+
+  <header class="hero">
+    <img class="head" src="img/head.png" alt="הדמות של HAVIV עם משקפי שמש וכתר זהב" width="440" height="550">
+    <h1 class="mark">HAVIV</h1>
+    <p class="tagline glass">זמר ויוצר פופ ו-R&amp;B. שירים על אמונה, אהבה ותקווה.</p>
+    <div class="facts">
+      <span class="chip glass">פופ · R&amp;B</span>
+      <span class="chip glass">2 סינגלים</span>
+      <span class="chip glass">עברית</span>
+    </div>
+  </header>
+
+  <nav class="primary" aria-label="פעולות עיקריות">
+    <a class="btn-main glass" href="https://open.spotify.com/artist/6UR8HUTUXgYC6q6Qd0eXdX" target="_blank" rel="noopener">
+      <span class="logo spotify"><i class="fa-brands fa-spotify" aria-hidden="true"></i></span>האזנה בספוטיפיי
+    </a>
+    <a class="btn-main glass" href="https://www.youtube.com/@HAVIVMUSIC" target="_blank" rel="noopener">
+      <span class="logo youtube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></span>לערוץ היוטיוב
+    </a>
+  </nav>
+
+  <section id="music" aria-labelledby="music-h">
+    <div class="label glass"><h2 id="music-h">השירים</h2><span>סינגלים 2026</span></div>
+    <div class="songs">
+
+      <article class="song glass">
+        <a class="cover" href="https://youtu.be/Yv4tvvg9-3I" target="_blank" rel="noopener" aria-label="צפייה בקליפ שער שייפתח ביוטיוב">
+          <img src="img/shaar.jpg" alt="עטיפת הסינגל שער שייפתח: שער מואר עם לב במדבר" width="960" height="540" loading="lazy">
+          <span class="play"><svg aria-hidden="true"><use href="#i-play"/></svg></span>
+        </a>
+        <div class="song-body">
+          <div class="song-top"><h3>שער שייפתח</h3><span class="meta">סינגל · 2:50</span></div>
+          <p class="quote">״שער שייפתח, הלב יסלח, יחזיר לנו כוח לאהוב״</p>
+          <p class="desc">שיר על הרגע שבו הזמן עוצר, הכאב משתחרר והלב נפתח לסלוח.</p>
+          <div class="actions">
+            <a class="pill glass" href="https://youtu.be/Yv4tvvg9-3I" target="_blank" rel="noopener"><span class="logo sm youtube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></span>קליפ מילים</a>
+            <a class="pill glass" href="https://open.spotify.com/artist/6UR8HUTUXgYC6q6Qd0eXdX" target="_blank" rel="noopener"><span class="logo sm spotify"><i class="fa-brands fa-spotify" aria-hidden="true"></i></span>ספוטיפיי</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="song glass">
+        <a class="cover" href="https://youtu.be/AGmCeAlQAfk" target="_blank" rel="noopener" aria-label="צפייה בקליפ מדינת היהודים ביוטיוב">
+          <img src="img/medina.jpg" alt="עטיפת הסינגל מדינת היהודים: יונה עם עלה זית מעל ירושלים בלילה" width="960" height="540" loading="lazy">
+          <span class="play"><svg aria-hidden="true"><use href="#i-play"/></svg></span>
+        </a>
+        <div class="song-body">
+          <div class="song-top"><h3>מדינת היהודים</h3><span class="meta">סינגל · 4:03</span></div>
+          <p class="quote">״מדינת היהודים, זה הבית, זה הלב״</p>
+          <p class="desc">שיר על שלום, על הבית ועל עם שממשיך ללכת אל האור, מדור לדור.</p>
+          <div class="actions">
+            <a class="pill glass" href="https://youtu.be/AGmCeAlQAfk" target="_blank" rel="noopener"><span class="logo sm youtube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></span>קליפ מילים</a>
+            <a class="pill glass" href="https://open.spotify.com/artist/6UR8HUTUXgYC6q6Qd0eXdX" target="_blank" rel="noopener"><span class="logo sm spotify"><i class="fa-brands fa-spotify" aria-hidden="true"></i></span>ספוטיפיי</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="shorts" aria-labelledby="shorts-h">
+    <div class="label glass"><h2 id="shorts-h">סרטונים קצרים</h2><span>חדש כל שבוע</span></div>
+    <div class="shorts glass">
+      <a class="short-thumb" href="https://youtube.com/shorts/zuS571JL-BQ" target="_blank" rel="noopener" aria-label="צפייה בסרטון נעים מאוד, אני HAVIV">
+        <img src="img/short-intro.jpg" alt="פריים מתוך הסרטון נעים מאוד, אני HAVIV" width="360" height="640" loading="lazy">
+        <span class="play small"><svg aria-hidden="true"><use href="#i-play"/></svg></span>
+      </a>
+      <div class="shorts-copy">
+        <h3>נעים מאוד, אני HAVIV</h3>
+        <p>קטעים מהשירים, מאחורי הקלעים וברכות לשבת. הסרטונים עולים ל-YouTube Shorts, לטיקטוק ולאינסטגרם.</p>
+        <div class="actions">
+          <a class="pill glass" href="https://youtube.com/shorts/zuS571JL-BQ" target="_blank" rel="noopener"><span class="logo sm youtube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></span>לצפייה</a>
+          <a class="pill glass" href="https://www.tiktok.com/@haviv.music" target="_blank" rel="noopener"><span class="logo sm tiktok"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></span>בטיקטוק</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="follow" aria-labelledby="follow-h">
+    <div class="label glass"><h2 id="follow-h">עקבו אחרי HAVIV</h2></div>
+    <ul class="links">
+      <li><a class="link glass" href="https://open.spotify.com/artist/6UR8HUTUXgYC6q6Qd0eXdX" target="_blank" rel="noopener">
+        <span class="logo spotify"><i class="fa-brands fa-spotify" aria-hidden="true"></i></span>
+        <span><b>Spotify</b><small>HAVIV</small></span>
+        <svg class="arrow" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
+      <li><a class="link glass" href="https://www.youtube.com/@HAVIVMUSIC" target="_blank" rel="noopener">
+        <span class="logo youtube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></span>
+        <span><b>YouTube</b><small>@HAVIVMUSIC</small></span>
+        <svg class="arrow" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
+      <li><a class="link glass" href="https://www.instagram.com/havivmusic" target="_blank" rel="noopener">
+        <span class="logo instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></span>
+        <span><b>Instagram</b><small>@havivmusic</small></span>
+        <svg class="arrow" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
+      <li><a class="link glass" href="https://www.tiktok.com/@haviv.music" target="_blank" rel="noopener">
+        <span class="logo tiktok"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></span>
+        <span><b>TikTok</b><small>@haviv.music</small></span>
+        <svg class="arrow" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
+      <li><a class="link glass" href="https://www.facebook.com/profile.php?id=61595006690682" target="_blank" rel="noopener">
+        <span class="logo facebook"><i class="fa-brands fa-facebook" aria-hidden="true"></i></span>
+        <span><b>Facebook</b><small>HAVIV</small></span>
+        <svg class="arrow" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
+      <li><a class="link glass" href="https://x.com/HAVIVMUSIC" target="_blank" rel="noopener">
+        <span class="logo x"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></span>
+        <span><b>X</b><small>@HAVIVMUSIC</small></span>
+        <svg class="arrow" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
+      <li><a class="link glass" href="https://www.threads.com/@havivmusic" target="_blank" rel="noopener">
+        <span class="logo threads"><i class="fa-brands fa-threads" aria-hidden="true"></i></span>
+        <span><b>Threads</b><small>@havivmusic</small></span>
+        <svg class="arrow" aria-hidden="true"><use href="#i-chev"/></svg></a></li>
+    </ul>
+  </section>
+
+  <section id="about" aria-labelledby="about-h">
+    <div class="about glass">
+      <h2 id="about-h">על HAVIV</h2>
+      <p>HAVIV הוא זמר ויוצר ישראלי שכותב שירים על אמונה, תקווה והדברים שבין השמיים לארץ. הוא משלב מלודיות חמות ורגש עמוק עם הפקה עכשווית ושימוש בכלי AI.</p>
+      <p>הדמות עם משקפי השמש והכתר הזהוב היא הפנים של הפרויקט. מי שמאחוריה ייחשף בהמשך הדרך.</p>
+    </div>
+  </section>
+
+  <section class="contact glass" aria-labelledby="contact-h">
+    <div>
+      <h2 id="contact-h">יצירת קשר</h2>
+      <p>להופעות, שיתופי פעולה ופניות</p>
+    </div>
+    <div class="mail">
+      <code id="email">havivmusic1@gmail.com</code>
+      <button class="copy" id="copy-email" type="button">העתקה</button>
+    </div>
+  </section>
+
+  <footer class="glass">© 2026 HAVIV</footer>
+</div>
+
+<script>
+  (function () {
+    var btn = document.getElementById('copy-email');
+    var code = document.getElementById('email');
+    btn.addEventListener('click', function () {
+      var text = code.textContent.trim();
+      function selectIt() {
+        try {
+          var r = document.createRange(); r.selectNodeContents(code);
+          var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        } catch (e) {}
+      }
+      function done(msg) { btn.textContent = msg; setTimeout(function () { btn.textContent = 'העתקה'; }, 1800); }
+      try {
+        navigator.clipboard.writeText(text).then(function () { done('הועתק'); }, function () { selectIt(); done('סומן להעתקה'); });
+      } catch (e) { selectIt(); done('סומן להעתקה'); }
+    });
+  })();
+</script>
+</body>
+</html>
