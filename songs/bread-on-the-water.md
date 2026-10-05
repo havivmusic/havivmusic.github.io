@@ -99,7 +99,7 @@ Mm, it's gonna find you (find you again)
 - **Horns:** trumpet, trombone and tenor sax play a short original two-bar riff in the intro and turnarounds, a few stabs answering line ends, and a held swell into the last chorus. No horns in the verses.
 - **Percussion:** congas on the offbeats, shaker in swung eighths. The bridge drops to bass, rim and a hand-drum trio: a deep drum loud on 1 and soft on 3, a steady heartbeat drum, and a free high drum.
 - **Harmony singers:** three voices in close thirds. They echo line ends in the verses, sing "(on the water)" and "(find you again)" as answers in the chorus, hum "ooh" under verse 2, and loop the chant in the outro while the lead ad-libs.
-- **Lead vocal:** relaxed and conversational, slightly behind the beat. Verses like telling a story at a kitchen table, chorus opened up and sustained. Falsetto touch on "again". No put-on accent; HAVIV's own voice.
+- **Lead vocal:** relaxed and conversational, slightly behind the beat. Verses like telling a story at a kitchen table, chorus opened up and sustained. Falsetto touch on "again". Sung with a Jamaican accent and a light African inflection, as set in the Suno style box. Keep the words themselves in plain English, so the accent carries the colour and the story stays clear.
 - **Form and length:** intro 4 bars, verses 16, choruses 8, bridge 8, short verse 3 of 8, double chorus, vamp outro of 16 bars with a fade. About 100 bars, so about 5:30 at 74 BPM. For a radio edit, drop the second final chorus and cut the outro to 8 bars: about 84 bars, 4:30.
 - **Mix:** warm and analog. Bass and kick loudest, then the vocal, then the drums. Spring reverb on the rim and the harmonies, tape-delay throws on a few line ends and one snare hit in the bridge. No bright modern hi-hats, no 808s.
 
@@ -109,13 +109,15 @@ Mm, it's gonna find you (find you again)
 
 **Style**
 ```
-Roots reggae, vintage 1970s analog studio sound, one drop rhythm, 74 BPM, in G major; warm soulful male vocal, clear natural English diction, relaxed behind-the-beat phrasing; choppy offbeat skank guitar doubled by piano, Hammond organ bubble, deep round melodic bass up front, rim click on beat three, congas and hand drums; short horn section riffs with trumpet, trombone and tenor sax; three-part female harmony backing vocals answering the lead; spring reverb, light tape echo, warm analog mix; conscious roots mood, earnest, hopeful; long vamp outro with ad-libs, fade out
+Roots reggae, vintage 1970s analog studio sound, one drop rhythm, 74 BPM, in G major; warm soulful male vocal with a Jamaican accent and a touch of African inflection, relaxed behind-the-beat phrasing; choppy offbeat skank guitar doubled by piano, Hammond organ bubble, deep round melodic bass up front, rim click on beat three, congas and hand drums; short horn section riffs with trumpet, trombone and tenor sax; three-part female harmony backing vocals answering the lead; spring reverb, light tape echo, warm analog mix; conscious roots mood, earnest, hopeful; long vamp outro with ad-libs, fade out
 ```
 
 **Exclude Styles**
 ```
 dancehall, reggaeton, trap, EDM, autotune, steel drums, gospel choir, toasting
 ```
+
+**Accent tips:** if the accent comes out too faint, move the vocal clause to the very start of the Style box. If it comes out exaggerated, change "a Jamaican accent" to "a light Jamaican accent". If HAVIV uploads his own Voice, the Voice will pull toward his natural accent; raise Audio Influence only as far as the accent still holds.
 
 **Settings:** v6 · Male · Variety Off · Personalize Off · Max Mode On · Weirdness 25% · Style Influence 80% · Duration Custom 5:30 (for the radio edit described in the music notes, 4:30).
 
